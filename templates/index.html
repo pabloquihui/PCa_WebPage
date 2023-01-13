@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="w3-container">
+  {% if files %}
+    <h1 class="w3-xxxlarge w3-text-blue"><b>Select an existing MRI scan file.</b></h1>
+    <form action="{{ url_for('analyze') }}", method="post">                                 <!-- TODO: Cambiar aqui a analyze -->
+      <select name="files_dropdown" method="GET" action="/">
+        {% for file in files %}
+          <option value= "{{file}}" SELECTED>{{file}}</option>"
+        {% endfor %}
+      </select>
+      <input type = "submit"/>
+    </form>
+  {% else %}
+    <h1 class="w3-xxlarge w3-text-blue"><b>No existing MRI file found to segment. Please upload one.</b></h1>
+  {% endif %}
+  <h3 class="w3-text-black">
+    <a href="{{ url_for('upload_file') }}" class="w3-margin-right" onclick="w3_open()">Upload new file.</a>
+  </h3>
+  <h3 class="w3-xlarge w3-text-blue"><b>Steps to segment a prostate image:</b></h3>
+
+   <ol>
+     <li> Go to the upload section and upload one or more MRI scans of T2w modality, either in .jpg or .png format.</li>
+     <li> Provide a unique name, you will need it later.</li>
+     <li> Wait for it to finish. You will be automaticlly redirected back to the homepage.</li>
+     <li> Your images will now be exported and displayed in a dropdown menu on the homepage. Click on it to get it processed.</li>
+     <li> Select the model that you want to use for segmentation </li>
+     <li> Wait for it to finish. Segmented images will be displayed. </li>
+   </ol>
+
+  </div>
+{% endblock %}
