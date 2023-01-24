@@ -1,0 +1,15 @@
+# Flask==2.2.2
+imageio==2.23.0
+# keras==2.10.0
+matplotlib==3.6.2
+numpy==1.24.0
+opencv_contrib_python==4.6.0.66
+passlib==1.7.4
+Pillow==9.4.0
+pymongo==4.3.3
+scipy==1.10.0
+segmentation_models==1.0.1
+SimpleITK==2.2.1
+# tensorflow==2.11.0
+tensorflow_gpu==2.10.1
+Werkzeug==2.2.2

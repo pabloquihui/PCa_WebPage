@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/dd799580-c6a3-4cbf-844d-b16fcb51f975/AppServices/subscriptions/dd799580-c6a3-4cbf-844d-b16fcb51f975/resourceGroups/prosegmentation_group/providers/Microsoft.Web/sites/prosegmentation",
+    "appService.deploySubpath": "."
+}
