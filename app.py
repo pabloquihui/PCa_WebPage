@@ -6,7 +6,6 @@ from flask import Flask, render_template, flash, redirect, url_for, request, sen
 from werkzeug.utils import secure_filename
 import re
 import numpy as np
-
 from config import Config
 
 app = Flask(__name__)
@@ -155,3 +154,5 @@ def download(file):
         return redirect(url_for(name), code=301)
 
 
+if __name__ == '__main__':
+    app.run()
