@@ -146,10 +146,12 @@ def analyze():
             flash('Select a MRI file from the list or add your own to get the prediction result.')
             return redirect(url_for('index'))
 
-
 @app.route('/download-mask/<file>/', methods=['GET'])
 def download(file):
     if request.method == 'GET':
+        # if file == 'pred': 
+        # print(file)
         name = '/preds/t2w_pred.png'
-        return redirect(url_for('static', filename=app.config['EXPORT_FOLDER_REL']+name), code=301)
+        return redirect(url_for(name), code=301)
+
 

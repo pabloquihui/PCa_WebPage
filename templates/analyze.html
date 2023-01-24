@@ -23,18 +23,25 @@
         <center><img src="{{ url_for('static', filename='images/orig/t2w_mri.jpg') }}" alt="T2w" style="width:80%;"></center>
       </div>
       <div class="column">
-        <h3 class="w3-xxlarge w3-text-black"><b>Segmented Image</b></h3>
+        <h3 class="w3-xxlarge w3-text-black"><b>Segmentation</b></h3>
         <hr style="width:50px;border:5px solid blue" class="w3-round">
         <center><h3 class="w3-xlarge w3-text-black">Segmented T2w</h3></center>
         <center><img src="{{ url_for('static', filename='images/preds/t2w_pred.png') }}" alt="Segmented T2" style="width:80%"></center>
-        <a href='/download-mask/{{ file }}/', target='_blank'><center><h3 class="w3-xlarge w3-text-blue">Download</h3></center></a>
         <br />
-        <b>Label coding:</b><br />
-        In Red: TUMOR <br />
-        In Green: CZ <br />
-        In Blue: PZ <br />
-        In Purple: TZ <br />
-        <br />
+        <b><center>Label coding:</center></b>
+        <center>In Green: CZ</center>
+        <center>In Blue: PZ</center>
+        <center>In Purple: TZ</center>
+        <center>In Red: TUMOR</center>
+        <!-- <br /> -->
+        <a href="{{ url_for('static', filename='images/preds/t2w_pred.png') }}", target='_blank'><center><h3 class="w3-xlarge w3-text-blue">Download</h3></center></a>
+      </div>
+      <div class="column">
+        <h3 class="w3-xxlarge w3-text-black"><b>Uncertainty</b></h3>
+        <hr style="width:50px;border:5px solid blue" class="w3-round">
+        <center><h3 class="w3-xlarge w3-text-black">Uncertainty</h3></center>
+        <center><img src="{{ url_for('static', filename='images/preds/uncertainty.png') }}" alt="Uncertainty" style="width:80%;"></center>
+        <a href="{{ url_for('static', filename='images/preds/uncertainty.png') }}", target='_blank'><center><h3 class="w3-xlarge w3-text-blue">Download</h3></center></a>
       </div>
       
     </div>
@@ -64,7 +71,8 @@
       </div>
     </div> -->
 
-  </div>
+
+</div>
 {% endif %}
 </div>
 {% endblock %}

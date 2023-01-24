@@ -13,6 +13,7 @@ class Config(object):
     TESTING_ANALYZE = os.environ.get('TESTING_ANALYZE', 0)
     IMAGE_SIZE = 256
     NO_ZONES = 5
+    T = 5                  #Number of predictions for uncertainty quantification
 
     DEBUG = True
-    MODEL = './static/models/unet_model'
+    MODEL = './static/models/mc_dense_unet_model'
