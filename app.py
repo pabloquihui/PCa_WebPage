@@ -13,8 +13,8 @@ app.secret_key = b'\xb4\xc6O8\xf3\xba\x83p\xc2\x18-b\xe1\xadqL'
 app.config.from_object(Config)
 
 # Database
-client = pymongo.MongoClient('localhost', 27017)
-db = client.user_login_system
+# client = pymongo.MongoClient('localhost', 27017)
+# db = client.user_login_system
 
 from user.utils import make_png, read_img, save_png
 # Decorators
@@ -32,10 +32,11 @@ from user import routes
 
 @app.route('/')
 def home():
-    return render_template('login.html')
+    # return render_template('login.html')
+    return render_template('index.html')
 
 @app.route('/index/')
-@login_required
+# @login_required
 def index():
     path = app.config['UPLOAD_FOLDER'] + '/npy'
     files = [file for file in os.listdir(path)
@@ -44,7 +45,7 @@ def index():
     return render_template('index.html', title='Home', files=files)
 
 @app.route('/upload/')
-@login_required
+# @login_required
 def upload_file():
     return render_template('upload.html', title='Upload the MRI files')
 
