@@ -45,6 +45,6 @@ There are 2 sample images from a private Dataset provided the `samples/` directo
 The results are shown after you load and submit a prostate image from the dropout list in the 'Home' tab. At the left is the original image, at the center is the predicted segmentation of that image, and at the right is the uncertainty that the model had in certain pixels.
 If you want to change the number of predictions to calculate the uncertainty, inside the 'config.py' file is under the variable 'T'. Be aware that higher the number, more resources it will need. 
 
-Next is an example of a prediction: 
+Below is an example of a prediction: 
 
 ![Results](static/Interface_images/results.png)
