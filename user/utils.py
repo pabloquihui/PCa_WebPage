@@ -25,23 +25,21 @@ K.set_image_data_format('channels_first')
 path = app.config['UPLOAD_FOLDER']
 def read_img(img_path):
     SIZE = app.config["IMAGE_SIZE"]
-    img = Image.open(img_path).resize(size= (SIZE, SIZE)).convert(mode='L')
-    return img
+    img = tf.io.read_file(img_path)
+    tensor = tf.io.decode_image(img, channels=1, dtype=tf.dtypes.float32)
+    tensor = tf.image.resize(tensor, [SIZE, SIZE])
+    input_tensor = tf.expand_dims(tensor, axis=0)
+    input_img = input_tensor.numpy()
+    print(input_img.shape)
+    return input_img
 
-def preprocess(img):
-    img_arr = []
-    img_arr.append(img)
-    img = np.array(img_arr)
-    img = np.expand_dims(img, axis=-1)  
-    img = tf.keras.utils.normalize(img, axis=1)
-    return img
-
-def postprocess(mask):
-    kernel = np.ones((3, 3))
-    for i in range(mask.shape[0]):
-        for j in range(mask.shape[1]):
-            mask[i, j, ...] = cv2.dilate(mask[i, j, ...], kernel, iterations=1)
-
+# def preprocess(img):
+#     img_arr = []
+#     img_arr.append(img)
+#     img = np.array(img_arr)
+#     img = np.expand_dims(img, axis=-1)  
+#     img = tf.keras.utils.normalize(img, axis=1) #(1,256,256,1)
+#     return img
 
 def compute_entropy(predictive_prob):
     entropy_func = lambda x: -1 * np.sum(np.log(x + np.finfo(np.float32).eps) * x, axis=3)
@@ -144,21 +142,25 @@ def make_png(file):
         model = load_old_model(app.config['MODEL'])
 
     img_org = np.load(f'{path}/npy/{file}')
-    img = preprocess(img_org)
+    # img = preprocess(img_org)
+    img = img_org
+    img_org = np.squeeze(img_org)
+
+    print(img_org.shape)
     # pred = predict(img)                       # Used for regular models (without montecarlo dropout)
     
     pred, entropy = uncertainty(img)            # Used for MCDropout models
-    
+
     ## PLOT IMAGE AND PRED
     img_out = postprocess_pred(pred)
 
     # PREDICTION IMAGE SAVE
     img_out = Image.fromarray((img_out * 255).astype(np.uint8))
-    img_org_1 = Image.fromarray((img_org).astype(np.uint8)).convert('RGBA')    
+    img_org_1 = Image.fromarray((img_org*255).astype(np.uint8)).convert('RGBA')    
     img_org_1.paste(img_out, (0,0), img_out)
 
     # ENTROPY IMAGE SAVE
-    img_org_2 = Image.fromarray((img_org).astype(np.uint8)).convert('RGBA')  
+    img_org_2 = Image.fromarray((img_org*255).astype(np.uint8)).convert('RGBA')  
     entropy_img = get_entropy_img(entropy)
     img_org_2.paste(entropy_img, (0,0), entropy_img)
 
@@ -170,8 +172,6 @@ def make_png(file):
     name = f'{name}_mask'                                           #example_mask
     img_org_1.save(f'{path}/preds/t2w_pred.png', 'PNG')
 
-    # np.save(os.path.join(path, name), pred)  #example_mask.npy
-    pred = []
     return name
 
 

@@ -72,10 +72,8 @@ def upload_file_():
             cause = 'while exporting the files into a single multimodal-MRI'
             ' (.mmri) file. Make sure the uploaded files are valid MRI files'
             ' and try again.'
-            img = np.array(
-                read_img(os.path.join(path,                                       # TODO: REVISAR AQUI XQ NO JALA AL CARGAR IMAGEN
+            img = read_img(os.path.join(path,                                       # TODO: REVISAR AQUI XQ NO JALA AL CARGAR IMAGEN
                 secure_filename(f"t2w_mri.{formt}")))
-             )
             np.save(os.path.join(
               (app.config['UPLOAD_FOLDER']+'/npy'),
               secure_filename(f"{request.form['name']}")
@@ -111,6 +109,9 @@ def analyze():
         out_file = make_png(file)
         success = True
         error = None
+        # except:
+        #     sucess = False
+        #     error = 'Error making the png file'
 
 
         return render_template('analyze.html', title='Results', success=success,
