@@ -16,4 +16,4 @@ class Config(object):
     T = 5                  #Number of predictions for uncertainty quantification
 
     DEBUG = True
-    MODEL = './static/models/mc_dense_unet_model'
+    MODEL = './static/models/model'

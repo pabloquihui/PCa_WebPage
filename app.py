@@ -32,21 +32,20 @@ from user import routes
 
 @app.route('/')
 def home():
-    return render_template('login.html')
+    return render_template('login.html', title='Log In')
 
 @app.route('/index/')
 @login_required
 def index():
     path = app.config['UPLOAD_FOLDER'] + '/npy'
     files = [file for file in os.listdir(path)
-            #  if (file.endswith('.png') or file.endswith('.jpg') or file.endswith('.jpeg'))]
             if (file.endswith('.npy'))]
     return render_template('index.html', title='Home', files=files)
 
 @app.route('/upload/')
 @login_required
 def upload_file():
-    return render_template('upload.html', title='Upload the MRI files')
+    return render_template('upload.html', title='Upload files')
 
 @app.route('/uploader/', methods=['POST'])
 def upload_file_():
@@ -65,7 +64,6 @@ def upload_file_():
             f.save(
                 os.path.join(
                 path,
-                # secure_filename(f"{request.form['name']}_mri.{formt}")
                 secure_filename(f"t2w_mri.{formt}")
                 )
             )
@@ -76,32 +74,12 @@ def upload_file_():
             ' and try again.'
             img = np.array(
                 read_img(os.path.join(path,                                       # TODO: REVISAR AQUI XQ NO JALA AL CARGAR IMAGEN
-                #    secure_filename(f"{request.form['name']}_mri.{formt}")))
                 secure_filename(f"t2w_mri.{formt}")))
              )
             np.save(os.path.join(
               (app.config['UPLOAD_FOLDER']+'/npy'),
               secure_filename(f"{request.form['name']}")
             ), img)
-
-            # os.rename(
-            #     os.path.join(
-            #         app.config['UPLOAD_FOLDER'],
-            #         secure_filename(f"{request.form['name']}.npy")
-            #         ),
-            #     os.path.join(
-            #         app.config['UPLOAD_FOLDER'],
-            #         secure_filename(f"{request.form['name']}.mmri")
-            #         )
-            #     )
-            # cause = 'while cleaning up the temporary files. Make sure this '
-            # f'path is accessible and try again:{app.config["UPLOAD_FOLDER"]}'
-            # [os.remove(
-            #   os.path.join(
-            #     app.config['UPLOAD_FOLDER'],
-            #     f'{request.form["name"]}_mri.{formt}'
-            #     )
-            # )]
 
             cause = None
 
@@ -148,8 +126,6 @@ def analyze():
 @app.route('/download-mask/<file>/', methods=['GET'])
 def download(file):
     if request.method == 'GET':
-        # if file == 'pred': 
-        # print(file)
         name = '/preds/t2w_pred.png'
         return redirect(url_for(name), code=301)
 

@@ -133,7 +133,7 @@ def colorbar_img(entropy_data, uq_img):
     uq_full = Image.new("RGB", size, "white")
     uq_full.paste(uq_img, (0, 0))
     uq_full.paste(colorbar, (0, uq_size[1]))
-    uq_full.save(f'{path}/preds/uncertainty.png', 'PNG')
+    uq_full.save(f'{path}/preds/uncertainty.png', 'PNG', dpi=(300,300))
     [os.remove(os.path.join(path,'preds/onlycbar.png'))]
 
 
@@ -170,7 +170,7 @@ def make_png(file):
     name = f'{name}_mask'                                           #example_mask
     img_org_1.save(f'{path}/preds/t2w_pred.png', 'PNG')
 
-    np.save(os.path.join(path, name), pred)  #example_mask.npy
+    # np.save(os.path.join(path, name), pred)  #example_mask.npy
     pred = []
     return name
 

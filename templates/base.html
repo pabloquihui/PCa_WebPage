@@ -6,6 +6,7 @@
       {% else %}
       <title>Welcome to PCa Segmentation</title>
       {% endif %}
+      <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,11 +64,13 @@
   <div class="w3-bar-block">
     <a href="/index" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a>
     <a href="/upload" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Load a new MRI image</a>
-    <a href="https://github.com/pabloquihui" target='_blank' onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Report an Issue</a>
+    <a href="https://github.com/pabloquihui/PCa_WebPage/issues" target='_blank' onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Report an Issue</a>
     <br />
     <a class="w3-bar-item">Support the developers!</a>
     <a class="github-button" href="https://github.com/pabloquihui" data-size="large" data-show-count="true" aria-label="Follow @Pabloquihui on GitHub">Follow @Pabloquihui</a>
-    <a href="/user/logout" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white w3-bottom">Logout</a>
+    <br />
+    <br /> 
+    <a href="/user/logout" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white ">Logout</a>
   </div>
 </nav> -->
 
