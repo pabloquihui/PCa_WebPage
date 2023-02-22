@@ -5,8 +5,8 @@ This is part of my thesis project of Automatic Prostate Cancer Segmentation usin
 
 ## Preview
 
-![Login](Static/Interface_images/login.png)
-![Home](Static/Interface_images/home.png)
+![Login](static/Interface_images/login.png)
+![Home](static/Interface_images/home.png)
 
 ## Installation and Usage
 
@@ -17,7 +17,7 @@ This is part of my thesis project of Automatic Prostate Cancer Segmentation usin
 
    or [Download](https://github.com/pabloquihui/PCa_WebPage/archive/refs/heads/main.zip) and then extract its contents.
 
-2. Load a pretrained model inside the folder: `app/static/models/`. The name of the files should be `Model.h5` and `Model.json`. Or you can download a trained model from [here](https://drive.google.com/open?id=1U6o7FfR7Fue6ukIg_ciUoN0rjZs6QfrW)
+2. Load a pretrained model inside the folder: `app/static/models/`. The name of the files should be `Model.h5` and `Model.json`. Or you can use the model that is already there (Attention Dense U-Net)
    It is important that if you use your own model, in order to correctly calculate the uncertainty, it should have [MonteCarlo Dropouts](https://towardsdatascience.com/monte-carlo-dropout-7fd52f8b6571) in it.
 
 3. From the root folder of te repository, run:
@@ -47,4 +47,4 @@ If you want to change the number of predictions to calculate the uncertainty, in
 
 Next is an example of a prediction: 
 
-![Results](Static/Interface_images/results.png)
+![Results](static/Interface_images/results.png)
